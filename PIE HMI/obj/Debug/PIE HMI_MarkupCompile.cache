@@ -1,0 +1,20 @@
+﻿PIE HMI
+
+
+winexe
+C#
+.cs
+C:\Users\Andrew\Documents\UH\Capstone\Software\PIE-HMI\PIE HMI\obj\Debug\
+PIE_HMI
+none
+false
+DEBUG;TRACE
+C:\Users\Andrew\Documents\UH\Capstone\Software\PIE-HMI\PIE HMI\App.xaml
+9463875385
+11380318911
+16343169634
+171203353767
+Graphs\DrillGraph.xaml;Graphs\PowerGraph.xaml;MainWindow.xaml;Screens\DataScreen.xaml;Screens\JobSetupScreen.xaml;Screens\LogScreen.xaml;Screens\OperatorScreen.xaml;Screens\SettingsScreen.xaml;UserControls\NumericInput.xaml;
+
+False
+

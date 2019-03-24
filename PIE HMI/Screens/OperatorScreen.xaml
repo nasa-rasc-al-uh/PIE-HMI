@@ -1,0 +1,122 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PIE_HMI.Screens"
+             xmlns:UserControls="clr-namespace:PIE_HMI.UserControls" x:Class="PIE_HMI.Screens.OperatorScreen"
+             mc:Ignorable="d" 
+             d:DesignHeight="661" d:DesignWidth="916">
+    <Grid Background="#FFE5E5E5">
+        <Label x:Name="machineState" Content="Machine State" Margin="362,10,0,0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Width="527" Height="26" VerticalAlignment="Top" Background="Blue" Foreground="White"/>
+        <GroupBox x:Name="axesJog" Header="Jog X/Z" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,41,0,0" Height="332" Width="309" BorderBrush="Black">
+            <Grid Margin="2,2,2,2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Row 1 -->
+                <Label Content="X" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Content="Z1 (Drill)" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Content="Z2 (Water Ex)" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <!-- Row 2 -->
+                <Button x:Name="homeX" Grid.Row="1" Grid.Column="0" Background="#FFDDDDDD" Margin="2,2,2,2">
+                    <Image Height="50" Width="50" Source="pack://siteoforigin:,,,/Resources/Icons/home_x.png" Stretch="UniformToFill"/>
+                </Button>
+
+                <Button x:Name="homeZ1" Grid.Row="1" Grid.Column="1" Background="#FFDDDDDD" Margin="2,2,2,2">
+                    <Image Height="50" Width="50" Source="pack://siteoforigin:,,,/Resources/Icons/home_z.png" Stretch="UniformToFill"/>
+                </Button>
+
+                <Button x:Name="homeZ2" Grid.Row="1" Grid.Column="2" Background="#FFDDDDDD" Margin="2,2,2,2">
+                    <Image Height="50" Width="50" Source="pack://siteoforigin:,,,/Resources/Icons/home_z.png" Stretch="UniformToFill"/>
+                </Button>
+
+                <!-- Row 3 -->
+                <UserControls:NumericInput x:Name="xAxisStep" Grid.Row="2" Grid.Column="0" Margin="2,2,2,2" Text="0.0"/>
+                <UserControls:NumericInput x:Name="z1AxisStep" Grid.Row="2" Grid.Column="1" Margin="2,2,2,2" Text="0.0"/>
+                <UserControls:NumericInput x:Name="z2AxisStep" Grid.Row="2" Grid.Column="2" Margin="2,2,2,2" Text="0.0"/>
+
+                <!-- Row 4 -->
+                <Button x:Name="jogXFwd" Grid.Row="3" Grid.Column="0" Background="#FFDDDDDD" Margin="2,2,2,2" Click="jogXFwd_Click">
+                    <Image Height="50" Width="50" Source="pack://siteoforigin:,,,/Resources/Icons/jog_x_forward.png" Stretch="UniformToFill"/>
+                </Button>
+
+                <Button x:Name="jogZ1Fwd" Grid.Row="3" Grid.Column="1" Background="#FFDDDDDD" Margin="2,2,2,2" Click="jogZ1Fwd_Click">
+                    <Image Height="50" Width="50" Source="pack://siteoforigin:,,,/Resources/Icons/jog_z_forward.png" Stretch="UniformToFill"/>
+                </Button>
+
+                <Button x:Name="jogZ2Fwd" Grid.Row="3" Grid.Column="2" Background="#FFDDDDDD" Margin="2,2,2,2" Click="jogZ2Fwd_Click">
+                    <Image Height="50" Width="50" Source="pack://siteoforigin:,,,/Resources/Icons/jog_z_forward.png" Stretch="UniformToFill"/>
+                </Button>
+
+                <!-- Row 5 -->
+                <Button x:Name="jogXRev" Grid.Row="4" Grid.Column="0" Background="#FFDDDDDD" Margin="2,2,2,2" Click="jogXRev_Click">
+                    <Image Height="50" Width="50" Source="pack://siteoforigin:,,,/Resources/Icons/jog_x_reverse.png" Stretch="UniformToFill"/>
+                </Button>
+
+                <Button x:Name="jogZ1Rev" Grid.Row="4" Grid.Column="1" Background="#FFDDDDDD" Margin="2,2,2,2" Click="jogZ1Rev_Click">
+                    <Image Height="50" Width="50" Source="pack://siteoforigin:,,,/Resources/Icons/jog_z_reverse.png" Stretch="UniformToFill"/>
+                </Button>
+
+                <Button x:Name="jogZ2Rev" Grid.Row="4" Grid.Column="2" Background="#FFDDDDDD" Margin="2,2,2,2" Click="jogZ2Rev_Click">
+                    <Image Height="50" Width="50" Source="pack://siteoforigin:,,,/Resources/Icons/jog_z_reverse.png" Stretch="UniformToFill"/>
+                </Button>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="jogControls" Header="Jog Controls" HorizontalAlignment="Left" Margin="350,42,0,0" Width="539" Height="151" VerticalAlignment="Top" BorderBrush="Black" FontSize="11">
+            <Grid Margin="2,2,2,2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Row 1 -->
+                <Label Grid.Row="0" Grid.Column="0" Content="Drill" />
+                <UserControls:NumericInput x:Name="drillValue" Grid.Row="0" Grid.Column="1" Margin="2, 2, 2, 2" Text="0.0" TextChanged="DrillValue_TextChanged"/>
+                <Button x:Name="drillEnable" Grid.Row="0" Grid.Column="2" Margin="2, 2, 2, 2" Content="Enable Axis"/>
+                <Button x:Name="drillJogStart" Grid.Row="0" Grid.Column="3" Margin="2, 2, 2, 2" Content="On" Click="drillJogStart_Click"/>
+                <CheckBox x:Name="drillJogDir" Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Reverse"/>
+
+                <!-- Row 2 -->
+                <Label Grid.Row="1" Grid.Column="0" Content="EC System"/>
+                <UserControls:NumericInput x:Name="ecCurrentTarget" Grid.Row="1" Grid.Column="1" Margin="2, 2, 2, 2" Text="0.0"/>
+                <Button Grid.Row="1" Grid.Column="2" x:Name="ecEnable" Margin="2, 2, 2, 2" Content="Enable Axis"/>
+                <Button Grid.Row="1" Grid.Column="3" x:Name="ecToggle" Margin="2, 2, 2, 2" Content="On"/>
+
+                <!-- Row 3 -->
+                <Label Grid.Row="2" Grid.Column="0" Content="Heater"/>
+                <UserControls:NumericInput x:Name="heaterTempTarget" Grid.Row="2" Grid.Column="1" Margin="2, 2, 2, 2" Text="0.0"/>
+                <Button Grid.Row="2" Grid.Column="2" x:Name="heatEnable" Margin="2, 2, 2, 2" Content="Enable Axis"/>
+                <Button Grid.Row="2" Grid.Column="3" x:Name="heatToggle" Margin="2, 2, 2, 2" Content="On"/>
+
+                <!-- Row 4 -->
+                <Label Grid.Row="3" Grid.Column="0" Content="Borehole Pump"/>
+                <Button Grid.Row="3" Grid.Column="2" x:Name="pumpEnable" Margin="2, 2, 2, 2" Content="Enable Axis"/>
+                <Button Grid.Row="3" Grid.Column="3" x:Name="pumpFwd" Margin="2, 2, 2, 2" Content="On"/>
+            </Grid>
+        </GroupBox>
+        <Button x:Name="stopBtn" Content="STOP" HorizontalAlignment="Left" Margin="350,258,0,0" VerticalAlignment="Top" Width="233" RenderTransformOrigin="-0.333,-0.75" Height="115" FontSize="72" Background="Red" Click="StopBtn_Click"/>
+        <Button x:Name="startAuton" Content="Start Autonomous Mode" HorizontalAlignment="Left" Margin="593,258,0,0" VerticalAlignment="Top" Width="296" Height="115" Background="#FF03A803" FontSize="22" Click="StartAuton_Click"/>
+
+    </Grid>
+</UserControl>
