@@ -26,11 +26,18 @@ namespace PIE_HMI.Util
             }
         }
 
-        public void writeDataPoint(string x, string y)
+        public void writeHeader(string x, string y)
         {
             if (_writer == null) return;
 
-            //_writer.WriteLine()
+            _writer.WriteLine("", x, y);
+        }
+
+        public void writeDataPoint(double x, double y)
+        {
+            if (_writer == null) return;
+
+            _writer.WriteLine("{0},{1}", x, y);
         }
 
     }

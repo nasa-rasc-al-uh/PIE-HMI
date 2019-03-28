@@ -9,6 +9,7 @@
              PreviewTextInput="numericEntry"
              DataObject.Pasting="numericPasting"
              HorizontalContentAlignment="Center"
-             VerticalContentAlignment="Center">
+             VerticalContentAlignment="Center"
+             InputScope="Number">
 
 </TextBox>

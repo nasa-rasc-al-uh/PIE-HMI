@@ -28,8 +28,7 @@ namespace PIE_HMI.Screens
         public OperatorScreen()
         {
             InitializeComponent();
-            SPIComms = new Communication();
-            SPIComms.Init();
+            SPIComms = Communication.Instance;
         }
 
         private static readonly Regex _numerics = new Regex("[^0-9.]+");
@@ -61,7 +60,8 @@ namespace PIE_HMI.Screens
         {
             if (SPIComms.Connected())
             {
-                SPIComms.WriteVariable((object)1, "advanceState");
+                SPIComms.global.advanceState = 1;
+                SPIComms.WriteGlobal();
             }
         }
 
@@ -69,7 +69,8 @@ namespace PIE_HMI.Screens
         {
             if(SPIComms.Connected())
             {
-                SPIComms.WriteVariable((object)0, "running");
+                SPIComms.global.running = 0;
+                SPIComms.WriteGlobal();
             }
         }
 
@@ -79,7 +80,8 @@ namespace PIE_HMI.Screens
 
             if(SPIComms.Connected())
             {
-                SPIComms.WriteVariable((object)jogX, "jogX");
+                SPIComms.global.jogX = jogX;
+                SPIComms.WriteGlobal();
             }
         }
 
@@ -89,7 +91,8 @@ namespace PIE_HMI.Screens
 
             if (SPIComms.Connected())
             {
-                SPIComms.WriteVariable((object)jogX, "jogX");
+                SPIComms.global.jogX = jogX;
+                SPIComms.WriteGlobal();
             }
         }
 
@@ -99,7 +102,8 @@ namespace PIE_HMI.Screens
 
             if (SPIComms.Connected())
             {
-                SPIComms.WriteVariable((object)jogZ1, "jogZ1");
+                SPIComms.global.jogZ1 = jogZ1;
+                SPIComms.WriteGlobal();
             }
         }
 
@@ -109,7 +113,8 @@ namespace PIE_HMI.Screens
 
             if (SPIComms.Connected())
             {
-                SPIComms.WriteVariable((object)jogZ1, "jogZ1");
+                SPIComms.global.jogZ1 = jogZ1;
+                SPIComms.WriteGlobal();
             }
         }
 
@@ -119,7 +124,8 @@ namespace PIE_HMI.Screens
 
             if (SPIComms.Connected())
             {
-                SPIComms.WriteVariable((object)jogZ2, "jogZ2");
+                SPIComms.global.jogZ2 = jogZ2;
+                SPIComms.WriteGlobal();
             }
         }
 
@@ -129,7 +135,8 @@ namespace PIE_HMI.Screens
 
             if (SPIComms.Connected())
             {
-                SPIComms.WriteVariable((object)jogZ2, "jogZ2");
+                SPIComms.global.jogZ2 = jogZ2;
+                SPIComms.WriteGlobal();
             }
         }
 
@@ -151,8 +158,9 @@ namespace PIE_HMI.Screens
                     drill = direction*Double.Parse(drillValue.Text);
                     drillJogStart.Content = "Off";
                 }
-
-                SPIComms.WriteVariable((object)drill, "jogDrill");
+                
+                SPIComms.global.jogDrill = drill;
+                SPIComms.WriteGlobal();
             }
         }
 
@@ -174,7 +182,7 @@ namespace PIE_HMI.Screens
                     drill = direction * Double.Parse(drillValue.Text);
                 }
 
-                SPIComms.WriteVariable((object)drill, "jogDrill");
+                SPIComms.global.jogDrill = drill;
             }
         }
     }

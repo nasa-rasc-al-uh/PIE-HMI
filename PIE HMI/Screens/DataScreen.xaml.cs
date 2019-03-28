@@ -30,8 +30,7 @@ namespace PIE_HMI.Screens
         {
             InitializeComponent();
             rmsTimer = new DispatcherTimer();
-            SPIComms = new Communication();
-            SPIComms.Init();
+            SPIComms = Communication.Instance;
         }
 
         private void PowerGraph_Loaded(object sender, RoutedEventArgs e)

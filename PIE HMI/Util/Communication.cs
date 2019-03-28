@@ -3,22 +3,91 @@ using PIE_HMI.Screens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PIE_HMI.Util
 {
-    class Communication
+    public struct Global
     {
-        private static Api ch;
+        public int machineState;
 
-        private static bool connected;
-        
-        public void Init()
-        { 
-            if ( ch == null )
-                ch = new Api();
+        public int opControlState;
+        public int drillCoreState;
+        public int extractState;
+        public int filterState;
+
+        public int running;
+
+        public int advanceState;
+
+        public double drillWOB;
+        public double drillRPM;
+        public double heatTemp;
+
+        public double framePwr;
+        public double drillPwr;
+        public double waterExPwr;
+        public double filterPwr;
+        public double totalPwr;
+
+        public int drillState;
+
+        public double PELLET1_TC1_OFFSET, PELLET1_TC1_STATUS_OFFSET;
+        public double PELLET1_TC1, PELLET1_TC1_STATUS;
+
+        int ECAT_OUT1;
+
+        public double jogX;
+        public double jogZ1;
+        public double jogZ2;
+        public double jogDrill;
+        public int jogBoreholePump;
+    };
+
+    public struct Persist
+    {
+        public double drillVel;
+        public double drillAccel;
+        public double drillJerk;
+
+        public double Z1TravelVel;
+        public double Z1DrillVel;
+        public double Z1Accel;
+        public double Z1Jerk;
+
+        public double Z2TravelVel;
+        public double Z2ProbeVel;
+        public double Z2Accel;
+        public double Z2Jerk;
+
+        public double XVel;
+        public double XAccel;
+        public double XJerk;
+
+        public int persistentChanged;
+    };
+
+    public sealed class Communication
+    {
+
+        //Thread-safe lazy, singleton pattern
+        private static readonly Lazy<Communication> lazy = new Lazy<Communication>(() => new Communication());
+
+        public static Communication Instance { get { return lazy.Value; } }
+
+        private Communication()
+        {
+
         }
+
+        private Api ch = new Api();
+
+        private bool connected;
+
+        public Global global = new Global();
+        public Persist persist = new Persist();
 
         public Api getAPI()
         {
@@ -137,6 +206,71 @@ namespace PIE_HMI.Util
                 Console.WriteLine(ex.StackTrace);
             }
             return data;
+        }
+
+        public void WriteGlobal()
+        {
+            try
+            {
+                foreach (var field in typeof(Global).GetFields(BindingFlags.Instance | BindingFlags.Public))
+                {
+                    WriteVariable((object)field.GetValue(global), field.Name);
+                }
+            }
+            catch(Exception ex)
+            {
+                LogScreen.PushMessage(ex.StackTrace, MessageType.Error);
+            }
+        }
+
+        public void WritePersist()
+        {
+            try
+            {
+                persist.persistentChanged = 1;
+                foreach (var field in typeof(Persist).GetFields(BindingFlags.Instance | BindingFlags.Public))
+                {
+                    WriteVariable((object)field.GetValue(persist), field.Name);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogScreen.PushMessage(ex.StackTrace, MessageType.Error);
+            }
+        }
+
+        public void ReadGlobal()
+        {
+            try
+            {
+                foreach (var field in typeof(Global).GetFields(BindingFlags.Instance | BindingFlags.Public))
+                {
+                    object boxed = global;
+                    field.SetValue(boxed, ReadVariable(field.Name));
+                    global = (Global)boxed;
+                }
+            }
+            catch(Exception ex)
+            {
+                LogScreen.PushMessage(ex.StackTrace, MessageType.Error);
+            }
+        }
+
+        public void ReadPersist()
+        {
+            try
+            {
+                foreach (var field in typeof(Persist).GetFields(BindingFlags.Instance | BindingFlags.Public))
+                {
+                    object boxed = persist;
+                    field.SetValue(boxed, ReadVariable(field.Name));
+                    persist = (Persist)boxed;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogScreen.PushMessage(ex.StackTrace, MessageType.Error);
+            }
         }
 
     }

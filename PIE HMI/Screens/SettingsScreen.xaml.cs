@@ -1,7 +1,9 @@
 ﻿using ACS.SPiiPlusNET;
+using Microsoft.Win32;
 using PIE_HMI.Util;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -15,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace PIE_HMI.Screens
 {
@@ -38,8 +41,7 @@ namespace PIE_HMI.Screens
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            SPIComms = new Communication();
-            SPIComms.Init();
+            SPIComms = Communication.Instance;
             try
             {
                 bitConnected = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/Icons/Green.ico", UriKind.Absolute));
@@ -63,29 +65,32 @@ namespace PIE_HMI.Screens
 
             if(SPIComms.Connected())
             {
-                // Update drill settings
-                drillVel.Text = SPIComms.ReadVariable("drillVel").ToString();
-                drillAccel.Text = SPIComms.ReadVariable("drillAccel").ToString();
-                drillJerk.Text = SPIComms.ReadVariable("drillJerk").ToString();
-
-                // Update z1 axis settings
-                z1TravelVel.Text = SPIComms.ReadVariable("Z1TravelVel").ToString();
-                z1DrillVel.Text = SPIComms.ReadVariable("Z1DrillVel").ToString();
-                z1Accel.Text = SPIComms.ReadVariable("Z1Accel").ToString();
-                z1Jerk.Text = SPIComms.ReadVariable("Z1Jerk").ToString();
-
-                // Update z2 axis settings
-                z2TravelVel.Text = SPIComms.ReadVariable("Z2TravelVel").ToString();
-                z2ProbeVel.Text = SPIComms.ReadVariable("Z2ProbeVel").ToString();
-                z2Accel.Text = SPIComms.ReadVariable("Z2Accel").ToString();
-                z2Jerk.Text = SPIComms.ReadVariable("Z2Jerk").ToString();
-
-                // Update X-Axis settings
-                xVel.Text = SPIComms.ReadVariable("XVel").ToString();
-                xAccel.Text = SPIComms.ReadVariable("XAccel").ToString();
-                xJerk.Text = SPIComms.ReadVariable("XJerk").ToString();
+                SPIComms.ReadPersist();
 
             }
+            
+            // Update drill settings
+            drillVel.Text = SPIComms.persist.drillVel.ToString();
+            drillAccel.Text = SPIComms.persist.drillAccel.ToString();
+            drillJerk.Text = SPIComms.persist.drillJerk.ToString();
+
+            // Update z1 axis settings
+            z1TravelVel.Text = SPIComms.persist.Z1TravelVel.ToString();
+            z1DrillVel.Text = SPIComms.persist.Z1DrillVel.ToString();
+            z1Accel.Text = SPIComms.persist.Z1Accel.ToString();
+            z1Jerk.Text = SPIComms.persist.Z1Jerk.ToString();
+
+            // Update z2 axis settings
+            z2TravelVel.Text = SPIComms.persist.Z2TravelVel.ToString();
+            z2ProbeVel.Text = SPIComms.persist.Z2ProbeVel.ToString();
+            z2Accel.Text = SPIComms.persist.Z2Accel.ToString();
+            z2Jerk.Text = SPIComms.persist.Z2Jerk.ToString();
+
+            // Update X-Axis settings
+            xVel.Text = SPIComms.persist.XVel.ToString();
+            xAccel.Text = SPIComms.persist.XAccel.ToString();
+            xJerk.Text = SPIComms.persist.XJerk.ToString();
+
         }
 
         private void ComTypeCmB_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -197,143 +202,82 @@ namespace PIE_HMI.Screens
             }
         }
 
-        private void UpdateDrillVel_Click(object sender, RoutedEventArgs e)
+        private void UpdateSettingsBtn_Click(object sender, RoutedEventArgs e)
         {
             if (SPIComms == null) return;
 
             if(SPIComms.Connected())
             {
-                SPIComms.WriteVariable((object)Double.Parse(drillVel.Text), "s_drillVel");
+                //Drill Axis
+                SPIComms.persist.drillVel = Double.Parse(drillVel.Text);
+                SPIComms.persist.drillAccel = Double.Parse(drillAccel.Text);
+                SPIComms.persist.drillJerk = Double.Parse(drillJerk.Text);
+
+                //Z1 Axis
+                SPIComms.persist.Z1TravelVel = Double.Parse(z1TravelVel.Text);
+                SPIComms.persist.Z1DrillVel = Double.Parse(z1DrillVel.Text);
+                SPIComms.persist.Z1Accel = Double.Parse(z1Accel.Text);
+                SPIComms.persist.Z1Jerk = Double.Parse(z1Jerk.Text);
+
+                //Z2 Axis
+                SPIComms.persist.Z2TravelVel = Double.Parse(z2TravelVel.Text);
+                SPIComms.persist.Z2ProbeVel = Double.Parse(z2ProbeVel.Text);
+                SPIComms.persist.Z2Accel = Double.Parse(z2Accel.Text);
+                SPIComms.persist.Z2Jerk = Double.Parse(z2Jerk.Text);
+
+                //X Axis
+                SPIComms.persist.XVel = Double.Parse(xVel.Text);
+                SPIComms.persist.XAccel = Double.Parse(xAccel.Text);
+                SPIComms.persist.XJerk = Double.Parse(xJerk.Text);
+
+                SPIComms.WritePersist();
+            }
+        }
+        
+
+        private void SaveSettingsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "XML File (*.xml)|*.xml";
+            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            if(saveFileDialog.ShowDialog() == true)
+            {
+                string fileName = saveFileDialog.FileName;
+
+                XmlSerializer serializer = new XmlSerializer(typeof(Persist));
+                TextWriter writer = new StreamWriter(fileName);
+
+                serializer.Serialize(writer, SPIComms.persist);
+
             }
         }
 
-        private void UpdateDrillAccel_Click(object sender, RoutedEventArgs e)
+        private void LoadSettingsBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (SPIComms == null) return;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "XML File (*.xml)|*.xml";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            openFileDialog.Multiselect = false;
 
-            if (SPIComms.Connected())
+            if(openFileDialog.ShowDialog() == true)
             {
-                SPIComms.WriteVariable((object)Double.Parse(drillAccel.Text), "s_drillAccel");
-            }
-        }
+                string fileName = openFileDialog.FileName;
 
-        private void UpdateDrillJerk_Click(object sender, RoutedEventArgs e)
-        {
-            if (SPIComms == null) return;
+                try
+                {
 
-            if (SPIComms.Connected())
-            {
-                SPIComms.WriteVariable((object)Double.Parse(drillJerk.Text), "s_drillJerk");
-            }
-        }
+                    XmlSerializer serializer = new XmlSerializer(typeof(Persist));
+                    FileStream fs = new FileStream(fileName, FileMode.Open);
+                    SPIComms.persist = (Persist)serializer.Deserialize(fs);
+                    SPIComms.WritePersist();
 
-        private void UpdateZ1TravelVel_Click(object sender, RoutedEventArgs e)
-        {
-            if (SPIComms == null) return;
-
-            if (SPIComms.Connected())
-            {
-                SPIComms.WriteVariable((object)Double.Parse(z1TravelVel.Text), "s_Z1TravelVel");
-            }
-        }
-
-        private void UpdateZ1DrillVel_Click(object sender, RoutedEventArgs e)
-        {
-            if (SPIComms == null) return;
-
-            if (SPIComms.Connected())
-            {
-                SPIComms.WriteVariable((object)Double.Parse(z1DrillVel.Text), "Z1DrillVel");
-            }
-        }
-
-        private void UpdateZ1Accel_Click(object sender, RoutedEventArgs e)
-        {
-            if (SPIComms == null) return;
-
-            if (SPIComms.Connected())
-            {
-                SPIComms.WriteVariable((object)Double.Parse(z1Accel.Text), "s_Z1Accel");
-            }
-        }
-
-        private void UpdateZ1Jerk_Click(object sender, RoutedEventArgs e)
-        {
-            if (SPIComms == null) return;
-
-            if (SPIComms.Connected())
-            {
-                SPIComms.WriteVariable((object)Double.Parse(z1Jerk.Text), "s_Z1Jerk");
-            }
-        }
-
-        private void UpdateZ2TravelVel_Click(object sender, RoutedEventArgs e)
-        {
-            if (SPIComms == null) return;
-
-            if(SPIComms.Connected())
-            {
-                SPIComms.WriteVariable((object)Double.Parse(z2TravelVel.Text), "s_Z2TravelVel");
-            }
-        }
-
-        private void UpdateZ2Accel_Click(object sender, RoutedEventArgs e)
-        {
-            if (SPIComms == null) return;
-
-            if (SPIComms.Connected())
-            {
-                SPIComms.WriteVariable((object)Double.Parse(z2Accel.Text), "s_Z2Accel");
-            }
-        }
-
-        private void UpdateZ2Jerk_Click(object sender, RoutedEventArgs e)
-        {
-            if (SPIComms == null) return;
-
-            if (SPIComms.Connected())
-            {
-                SPIComms.WriteVariable((object)Double.Parse(z2Jerk.Text), "s_Z2Jerk");
-            }
-        }
-
-        private void UpdateXlVel_Click(object sender, RoutedEventArgs e)
-        {
-            if (SPIComms == null) return;
-
-            if (SPIComms.Connected())
-            {
-                SPIComms.WriteVariable((object)Double.Parse(xVel.Text), "s_XVel");
-            }
-        }
-
-        private void UpdateXAccel_Click(object sender, RoutedEventArgs e)
-        {
-            if (SPIComms == null) return;
-
-            if (SPIComms.Connected())
-            {
-                SPIComms.WriteVariable((object)Double.Parse(xAccel.Text), "s_XAccel");
-            }
-        }
-
-        private void UpdateXJerk_Click(object sender, RoutedEventArgs e)
-        {
-            if (SPIComms == null) return;
-
-            if (SPIComms.Connected())
-            {
-                SPIComms.WriteVariable((object)Double.Parse(xJerk.Text), "s_XJerk");
-            }
-        }
-
-        private void UpdateZ2ProbeVel_Click(object sender, RoutedEventArgs e)
-        {
-            if (SPIComms == null) return;
-
-            if(SPIComms.Connected())
-            {
-                SPIComms.WriteVariable((object)Double.Parse(z2ProbeVel.Text), "Z2ProbeVel");
+                    updateSettings();
+                }
+                catch(Exception ex)
+                {
+                    LogScreen.PushMessage(ex.StackTrace, MessageType.Warning);
+                }
             }
         }
     }

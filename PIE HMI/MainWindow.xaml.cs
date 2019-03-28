@@ -33,9 +33,8 @@ namespace PIE_HMI
 
         public MainWindow()
         {
-            SPIComms = new Communication();
+            SPIComms = Communication.Instance;
             InitializeComponent();
-            SPIComms.Init();
             telemetryTimer = new DispatcherTimer();
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -84,17 +83,20 @@ namespace PIE_HMI
             {
                 try
                 {
-                    wobReadout.Content = ((double)SPIComms.ReadVariable("drillWOB")).ToString();
-                    rpmReadout.Content = ((double)SPIComms.ReadVariable("drillRPM")).ToString();
-                    heatTemp.Content = ((double)SPIComms.ReadVariable("heatTemp")).ToString();
+                    SPIComms.ReadGlobal();
+                    SPIComms.ReadPersist();
 
-                    framePwr.Content = ((double)SPIComms.ReadVariable("framePwr")).ToString();
-                    drillPwr.Content = ((double)SPIComms.ReadVariable("drillPwr")).ToString();
-                    waterExPwr.Content = ((double)SPIComms.ReadVariable("waterExPwr")).ToString();
-                    filterPwr.Content = ((double)SPIComms.ReadVariable("filterPwr")).ToString();
-                    totalPwr.Content = ((double)SPIComms.ReadVariable("totalPwr")).ToString();
+                    wobReadout.Content = SPIComms.global.drillWOB.ToString();
+                    rpmReadout.Content = SPIComms.global.drillRPM.ToString();
+                    heatTemp.Content = SPIComms.global.heatTemp.ToString();
 
-                    int state = (int)SPIComms.ReadVariable("machineState");
+                    framePwr.Content = SPIComms.global.framePwr.ToString();
+                    drillPwr.Content = SPIComms.global.drillPwr.ToString();
+                    waterExPwr.Content = SPIComms.global.waterExPwr.ToString();
+                    filterPwr.Content = SPIComms.global.filterPwr.ToString();
+                    totalPwr.Content = SPIComms.global.totalPwr.ToString();
+
+                    int state = (int)SPIComms.global.machineState;
                     updateMachineState(state);
                 }
                 catch (Exception ex)

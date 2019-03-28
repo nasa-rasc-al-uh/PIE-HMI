@@ -13,7 +13,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -90,11 +89,9 @@
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Current Target (mA)</Label>
                 <UserControls:NumericInput x:Name="ecCurrentTarget" Grid.Row="0" Grid.Column="1" Margin="10 15 10 15" Text="0.0"></UserControls:NumericInput>
-                <Button x:Name="ecCurrentTargetUpdate" Grid.Row="0" Grid.Column="2" Margin="10 15 10 15">Update</Button>
 
                 <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">EC Time (s)</Label>
                 <UserControls:NumericInput x:Name="ecTimeTarget" Grid.Row="1" Grid.Column="1" Margin="10 15 10 15" Text="0.0"></UserControls:NumericInput>
-                <Button x:Name="ecTimeTargetUpdate" Grid.Row="1" Grid.Column="2" Margin="10 15 10 15">Update</Button>
             </Grid>
         </GroupBox>
         <GroupBox Header="Drill Axis" BorderBrush="Black" Width="423" FontSize="11" Grid.Row="1" Grid.Column="0">
@@ -111,15 +108,12 @@
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Velocity</Label>
                 <UserControls:NumericInput x:Name="drillVel" Grid.Row="0" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
-                <Button x:Name="updateDrillVel" Grid.Row="0" Grid.Column="2" Margin="10 10 10 10" Click="UpdateDrillVel_Click">Update</Button>
 
                 <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Acceleration</Label>
                 <UserControls:NumericInput x:Name="drillAccel" Grid.Row="1" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
-                <Button x:Name="updateDrillAccel" Grid.Row="1" Grid.Column="2" Margin="10 10 10 10" Click="UpdateDrillAccel_Click">Update</Button>
 
                 <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Jerk</Label>
                 <UserControls:NumericInput x:Name="drillJerk" Grid.Row="2" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
-                <Button x:Name="updateDrillJerk" Grid.Row="2" Grid.Column="2" Margin="10 10 10 10" Click="UpdateDrillJerk_Click">Update</Button>
             </Grid>
         </GroupBox>
         <GroupBox Header="X-Axis" BorderBrush="Black" Width="423" FontSize="11" Grid.Row="2" Grid.Column="0">
@@ -136,15 +130,12 @@
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Velocity</Label>
                 <UserControls:NumericInput x:Name="xVel" Grid.Row="0" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
-                <Button x:Name="updateXlVel" Grid.Row="0" Grid.Column="2" Margin="10 10 10 10" Click="UpdateXlVel_Click">Update</Button>
 
                 <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Acceleration</Label>
                 <UserControls:NumericInput x:Name="xAccel" Grid.Row="1" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
-                <Button x:Name="updateXAccel" Grid.Row="1" Grid.Column="2" Margin="10 10 10 10" Click="UpdateXAccel_Click">Update</Button>
 
                 <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Jerk</Label>
                 <UserControls:NumericInput x:Name="xJerk" Grid.Row="2" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
-                <Button x:Name="updateXJerk" Grid.Row="2" Grid.Column="2" Margin="10 10 10 10" Click="UpdateXJerk_Click">Update</Button>
             </Grid>
         </GroupBox>
         <GroupBox Header="Z1 Axis" BorderBrush="Black" Width="423" FontSize="11" Grid.Row="1" Grid.Column="1">
@@ -162,19 +153,15 @@
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Travel Velocity</Label>
                 <UserControls:NumericInput x:Name="z1TravelVel" Grid.Row="0" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
-                <Button x:Name="updateZ1TravelVel" Grid.Row="0" Grid.Column="2" Margin="10 10 10 10" Click="UpdateZ1TravelVel_Click">Update</Button>
 
                 <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Drill Velocity</Label>
                 <UserControls:NumericInput x:Name="z1DrillVel" Grid.Row="1" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
-                <Button x:Name="updateZ1DrillVel" Grid.Row="1" Grid.Column="2" Margin="10 10 10 10" Click="UpdateZ1DrillVel_Click">Update</Button>
 
                 <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Acceleration</Label>
                 <UserControls:NumericInput x:Name="z1Accel" Grid.Row="2" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
-                <Button x:Name="updateZ1Accel" Grid.Row="2" Grid.Column="2" Margin="10 10 10 10" Click="UpdateZ1Accel_Click">Update</Button>
 
                 <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Jerk</Label>
                 <UserControls:NumericInput x:Name="z1Jerk" Grid.Row="3" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
-                <Button x:Name="updateZ1Jerk" Grid.Row="3" Grid.Column="2" Margin="10 10 10 10" Click="UpdateZ1Jerk_Click">Update</Button>
             </Grid>
         </GroupBox>
         <GroupBox Header="Z2 Axis" BorderBrush="Black" Width="423" FontSize="11" Grid.Row="2" Grid.Column="1">
@@ -192,20 +179,28 @@
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Travel Velocity</Label>
                 <UserControls:NumericInput x:Name="z2TravelVel" Grid.Row="0" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
-                <Button x:Name="updateZ2TravelVel" Grid.Row="0" Grid.Column="2" Margin="10 10 10 10" Click="UpdateZ2TravelVel_Click">Update</Button>
 
                 <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Probe Velocity</Label>
                 <UserControls:NumericInput x:Name="z2ProbeVel" Grid.Row="1" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
-                <Button x:Name="updateZ2ProbeVel" Grid.Row="1" Grid.Column="2" Margin="10 10 10 10" Click="UpdateZ2ProbeVel_Click">Update</Button>
 
                 <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Acceleration</Label>
                 <UserControls:NumericInput x:Name="z2Accel" Grid.Row="2" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
-                <Button x:Name="updateZ2Accel" Grid.Row="2" Grid.Column="2" Margin="10 10 10 10" Click="UpdateZ2Accel_Click">Update</Button>
 
                 <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Jerk</Label>
                 <UserControls:NumericInput x:Name="z2Jerk" Grid.Row="3" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
-                <Button x:Name="updateZ2Jerk" Grid.Row="3" Grid.Column="2" Margin="10 10 10 10" Click="UpdateZ2Jerk_Click">Update</Button>
             </Grid>
         </GroupBox>
+        <Button x:Name="updateSettingsBtn" Grid.Row="3" Grid.Column="0" Click="UpdateSettingsBtn_Click">Update All</Button>
+        <Grid Grid.Row="3" Grid.Column="1" Margin="20 0 20 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="saveSettingsBtn" Grid.Row="0" Grid.Column="0" Click="SaveSettingsBtn_Click" Margin="0 0 5 0">Save Settings</Button>
+            <Button x:Name="LoadSettingsBtn" Grid.Row="0" Grid.Column="1" Click="LoadSettingsBtn_Click" Margin="5 0 0 0">Load Settings</Button>
+        </Grid>
     </Grid>
 </UserControl>
