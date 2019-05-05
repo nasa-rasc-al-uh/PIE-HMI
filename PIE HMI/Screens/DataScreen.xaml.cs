@@ -42,31 +42,17 @@ namespace PIE_HMI.Screens
             if (SPIComms == null) return;
             if (SPIComms.Connected())
             {
-                //double rms = ((double)SPIComms.ReadVariable("framePwr"));
-                //powerGraph.SeriesCollection[0].Values.Add(rms);
+                double frameRms = SPIComms.global.framePwr;
+                powerGraph.SeriesCollection[0].Values.Add(frameRms);
             }
-        }
 
-        private int counter = 0;
-        private void PowerGraph_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            PowerGraph graph = (PowerGraph)sender;
-            graph.SeriesCollection[0].Values.Add(400d + 100 * ++counter);
-            graph.SeriesCollection[1].Values.Add(300d + 100 * counter);
-            graph.SeriesCollection[2].Values.Add(200d + 100 * counter);
-            graph.SeriesCollection[3].Values.Add(100d + 100 * counter);
-            graph.SeriesCollection[4].Values.Add(0d + 100 * counter);
-
-            if (graph.SeriesCollection[0].Values.Count > 5)
+            if(powerGraph.SeriesCollection[0].Values.Count > 100)
             {
-                graph.SeriesCollection[0].Values.RemoveAt(0);
-                graph.SeriesCollection[1].Values.RemoveAt(0);
-                graph.SeriesCollection[2].Values.RemoveAt(0);
-                graph.SeriesCollection[3].Values.RemoveAt(0);
-                graph.SeriesCollection[4].Values.RemoveAt(0);
+                powerGraph.SeriesCollection[0].Values.RemoveAt(0);
             }
         }
 
+        int counter = 0;
         private void DrillGraph_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DrillGraph graph = (DrillGraph)sender;

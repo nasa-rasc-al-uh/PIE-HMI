@@ -20,7 +20,7 @@
         </Grid.ColumnDefinitions>
         
         <!-- Row 1 -->
-        <local1:PowerGraph x:Name="powerGraph" Grid.Row="0" Grid.Column="0" Width="600" MouseDoubleClick="PowerGraph_MouseDoubleClick" />
+        <local1:PowerGraph x:Name="powerGraph" Grid.Row="0" Grid.Column="0" Width="600"/>
         <GroupBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Header="CSV Export" BorderBrush="Black">
             <Grid>
                 <Grid.RowDefinitions>

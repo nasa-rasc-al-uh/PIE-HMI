@@ -4,9 +4,145 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PIE_HMI.Screens"
+             xmlns:UserControls="clr-namespace:PIE_HMI.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="661" d:DesignWidth="916">
     <Grid Background="#FFE5E5E5">
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Header="Drill Params" Width="423" Height="139" BorderBrush="Black" FontSize="11" Grid.Row="0" Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Row 1 -->
+                <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Touch RMS</Label>
+                <UserControls:NumericInput x:Name="touchRMSTb" Grid.Row="0" Grid.Column="1" Margin="10 5 10 5">0.0</UserControls:NumericInput>
+
+                <!-- Row 2 -->
+                <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Peck Distance</Label>
+                <UserControls:NumericInput x:Name="peckDistance" Grid.Row="1" Grid.Column="1" Margin="10 5 10 5">0.0</UserControls:NumericInput>
+
+                <!-- Row 3 -->
+                <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"> Retract Distance</Label>
+                <UserControls:NumericInput x:Name="retractDistance" Grid.Row="2" Grid.Column="1" Margin="10 5 10 5">0.0</UserControls:NumericInput>
+
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Digital Core Params" Width="423" Height="139" BorderBrush="Black" FontSize="11" Grid.Row="0" Grid.Column="1">
+        </GroupBox>
+        <GroupBox Header="Water Extract Params" BorderBrush="Black" Width="423" FontSize="11" Grid.Row="1" Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Z Offset</Label>
+                <UserControls:NumericInput x:Name="zOffset" Grid.Row="0" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
+
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Heater Temperature</Label>
+                <UserControls:NumericInput x:Name="heaterTemp" Grid.Row="1" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Filtration Params" BorderBrush="Black" Width="423" FontSize="11" Grid.Row="2" Grid.Column="0">
+            <Grid Height="363">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Current Target</Label>
+                <UserControls:NumericInput x:Name="currentTarget" Grid.Row="0" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
+
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">EC Time</Label>
+                <UserControls:NumericInput x:Name="ecTime" Grid.Row="1" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
+
+                <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Enable Sloshing</Label>
+                <CheckBox x:Name="enableSloshing" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" ></CheckBox>
+
+                <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Slosh Amplitude</Label>
+                <UserControls:NumericInput x:Name="sloshAmp" Grid.Row="3" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
+
+                <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Slosh Frequency</Label>
+                <UserControls:NumericInput x:Name="sloshFreq" Grid.Row="4" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
+                
+                <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Slosh Time</Label>
+                <UserControls:NumericInput x:Name="sloshTime" Grid.Row="5" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
+                
+                <Label Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Back Flush Trigger Current</Label>
+                <UserControls:NumericInput x:Name="backFlushTrigger" Grid.Row="6" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Hole Params" BorderBrush="Black" Width="423" FontSize="11" Grid.Row="1" Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Hole Spacing</Label>
+                <UserControls:NumericInput x:Name="holeSpacing" Grid.Row="0" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
+
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Number of Holes</Label>
+                <UserControls:NumericInput x:Name="numHoles" Grid.Row="1" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="" BorderBrush="Black" Width="423" FontSize="11" Grid.Row="2" Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="0" Grid.Column="0">Update All</Button>
+                <Button Grid.Row="1" Grid.Column="0">Save</Button>
+                <Button Grid.Row="2" Grid.Column="0">Load</Button>
+            </Grid>
+        </GroupBox>
+        <!--<Button x:Name="updateSettingsBtn" Grid.Row="3" Grid.Column="0" Click="UpdateSettingsBtn_Click">Update All</Button> -->
+        <Grid Grid.Row="3" Grid.Column="1" Margin="20 0 20 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--<Button x:Name="saveSettingsBtn" Grid.Row="0" Grid.Column="0" Click="SaveSettingsBtn_Click" Margin="0 0 5 0">Save Settings</Button>
+            <Button x:Name="LoadSettingsBtn" Grid.Row="0" Grid.Column="1" Click="LoadSettingsBtn_Click" Margin="5 0 0 0">Load Settings</Button>-->
+        </Grid>
     </Grid>
 </UserControl>

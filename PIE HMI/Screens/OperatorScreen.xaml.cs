@@ -29,30 +29,61 @@ namespace PIE_HMI.Screens
         {
             InitializeComponent();
             SPIComms = Communication.Instance;
+            xAxisStep.units = "mm";
+            z1AxisStep.units = "mm";
+            z2AxisStep.units = "mm";
+            drillValue.units = "RPM";
+
+            xAxisStep.init(0);
+            z1AxisStep.init(0);
+            z2AxisStep.init(0);
+            drillValue.init(0);
         }
 
-        private static readonly Regex _numerics = new Regex("[^0-9.]+");
-        private bool isNumeric(string text)
+        private void enableControl()
         {
-            return !_numerics.IsMatch(text);
+            axesJog.IsEnabled = true;
+            jogControls.IsEnabled = true;
         }
-        private void numericEntry(object sender, TextCompositionEventArgs e)
+       
+        private void disableControl()
         {
-            e.Handled = !isNumeric(e.Text);
+            axesJog.IsEnabled = false;
+            jogControls.IsEnabled = false;
         }
-        private void numericPasting(object sender, DataObjectPastingEventArgs e)
+        
+        public void updateMachineState(int state)
         {
-            if (e.DataObject.GetDataPresent(typeof(String)))
+            switch (state)
             {
-                String text = (String)e.DataObject.GetData(typeof(String));
-                if (!isNumeric(text))
-                {
-                    e.CancelCommand();
-                }
-            }
-            else
-            {
-                e.CancelCommand();
+                case -1:
+                    machineState.Content = "NOT CONNECTED";
+                    disableControl();
+                    break;
+                case 0:
+                    machineState.Content = "STOPPED";
+                    disableControl();
+                    break;
+                case 10:
+                    machineState.Content = "OPERATOR CONTROL STATE";
+                    enableControl();
+                    break;
+                case 50:
+                    machineState.Content = "INIT AUTONOMOUS STATE";
+                    disableControl();
+                    break;
+                case 100:
+                    machineState.Content = "DRILLING AND CORING STATE";
+                    disableControl();
+                    break;
+                case 150:
+                    machineState.Content = "WATER EXTRACTION STATE";
+                    disableControl();
+                    break;
+                case 200:
+                    machineState.Content = "FILTRATION STATE";
+                    disableControl();
+                    break;
             }
         }
 
@@ -76,7 +107,7 @@ namespace PIE_HMI.Screens
 
         private void jogXFwd_Click(object sender, RoutedEventArgs e)
         {
-            double jogX = Double.Parse(xAxisStep.Text);
+            double jogX = xAxisStep.getNumeric();
 
             if(SPIComms.Connected())
             {
@@ -87,7 +118,7 @@ namespace PIE_HMI.Screens
 
         private void jogXRev_Click(object sender, RoutedEventArgs e)
         {
-            double jogX = -Double.Parse(xAxisStep.Text);
+            double jogX = -xAxisStep.getNumeric();
 
             if (SPIComms.Connected())
             {
@@ -98,7 +129,7 @@ namespace PIE_HMI.Screens
 
         private void jogZ1Fwd_Click(object sender, RoutedEventArgs e)
         {
-            double jogZ1 = Double.Parse(z1AxisStep.Text);
+            double jogZ1 = z1AxisStep.getNumeric();
 
             if (SPIComms.Connected())
             {
@@ -109,7 +140,7 @@ namespace PIE_HMI.Screens
 
         private void jogZ1Rev_Click(object sender, RoutedEventArgs e)
         {
-            double jogZ1 = -Double.Parse(z1AxisStep.Text);
+            double jogZ1 = -z1AxisStep.getNumeric();
 
             if (SPIComms.Connected())
             {
@@ -120,7 +151,7 @@ namespace PIE_HMI.Screens
 
         private void jogZ2Fwd_Click(object sender, RoutedEventArgs e)
         {
-            double jogZ2 = Double.Parse(z2AxisStep.Text);
+            double jogZ2 = z2AxisStep.getNumeric();
 
             if (SPIComms.Connected())
             {
@@ -131,7 +162,7 @@ namespace PIE_HMI.Screens
 
         private void jogZ2Rev_Click(object sender, RoutedEventArgs e)
         {
-            double jogZ2 = -Double.Parse(z2AxisStep.Text);
+            double jogZ2 = -z2AxisStep.getNumeric();
 
             if (SPIComms.Connected())
             {
@@ -155,7 +186,7 @@ namespace PIE_HMI.Screens
                 }
                 else
                 {
-                    drill = direction*Double.Parse(drillValue.Text);
+                    drill = direction * drillValue.getNumeric();
                     drillJogStart.Content = "Off";
                 }
                 
@@ -179,7 +210,7 @@ namespace PIE_HMI.Screens
 
                 if ((string)drillJogStart.Content == "Off")
                 {
-                    drill = direction * Double.Parse(drillValue.Text);
+                    drill = direction * drillValue.getNumeric();
                 }
 
                 SPIComms.global.jogDrill = drill;

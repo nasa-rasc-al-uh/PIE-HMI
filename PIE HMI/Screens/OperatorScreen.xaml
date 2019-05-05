@@ -31,15 +31,15 @@
 
                 <!-- Row 2 -->
                 <Button x:Name="homeX" Grid.Row="1" Grid.Column="0" Background="#FFDDDDDD" Margin="2,2,2,2">
-                    <Image Height="50" Width="50" Source="pack://siteoforigin:,,,/Resources/Icons/home_x.png" Stretch="UniformToFill"/>
+                    <Image Height="50" Width="50" Source="pack://application:,,,/Resources/Icons/home_x.png" Stretch="UniformToFill"/>
                 </Button>
 
                 <Button x:Name="homeZ1" Grid.Row="1" Grid.Column="1" Background="#FFDDDDDD" Margin="2,2,2,2">
-                    <Image Height="50" Width="50" Source="pack://siteoforigin:,,,/Resources/Icons/home_z.png" Stretch="UniformToFill"/>
+                    <Image Height="50" Width="50" Source="pack://application:,,,/Resources/Icons/home_z.png" Stretch="UniformToFill"/>
                 </Button>
 
                 <Button x:Name="homeZ2" Grid.Row="1" Grid.Column="2" Background="#FFDDDDDD" Margin="2,2,2,2">
-                    <Image Height="50" Width="50" Source="pack://siteoforigin:,,,/Resources/Icons/home_z.png" Stretch="UniformToFill"/>
+                    <Image Height="50" Width="50" Source="pack://application:,,,/Resources/Icons/home_z.png" Stretch="UniformToFill"/>
                 </Button>
 
                 <!-- Row 3 -->
@@ -49,28 +49,28 @@
 
                 <!-- Row 4 -->
                 <Button x:Name="jogXFwd" Grid.Row="3" Grid.Column="0" Background="#FFDDDDDD" Margin="2,2,2,2" Click="jogXFwd_Click">
-                    <Image Height="50" Width="50" Source="pack://siteoforigin:,,,/Resources/Icons/jog_x_forward.png" Stretch="UniformToFill"/>
+                    <Image Height="50" Width="50" Source="pack://application:,,,/Resources/Icons/jog_x_forward.png" Stretch="UniformToFill"/>
                 </Button>
 
                 <Button x:Name="jogZ1Fwd" Grid.Row="3" Grid.Column="1" Background="#FFDDDDDD" Margin="2,2,2,2" Click="jogZ1Fwd_Click">
-                    <Image Height="50" Width="50" Source="pack://siteoforigin:,,,/Resources/Icons/jog_z_forward.png" Stretch="UniformToFill"/>
+                    <Image Height="50" Width="50" Source="pack://application:,,,/Resources/Icons/jog_z_forward.png" Stretch="UniformToFill"/>
                 </Button>
 
                 <Button x:Name="jogZ2Fwd" Grid.Row="3" Grid.Column="2" Background="#FFDDDDDD" Margin="2,2,2,2" Click="jogZ2Fwd_Click">
-                    <Image Height="50" Width="50" Source="pack://siteoforigin:,,,/Resources/Icons/jog_z_forward.png" Stretch="UniformToFill"/>
+                    <Image Height="50" Width="50" Source="pack://application:,,,/Resources/Icons/jog_z_forward.png" Stretch="UniformToFill"/>
                 </Button>
 
                 <!-- Row 5 -->
                 <Button x:Name="jogXRev" Grid.Row="4" Grid.Column="0" Background="#FFDDDDDD" Margin="2,2,2,2" Click="jogXRev_Click">
-                    <Image Height="50" Width="50" Source="pack://siteoforigin:,,,/Resources/Icons/jog_x_reverse.png" Stretch="UniformToFill"/>
+                    <Image Height="50" Width="50" Source="pack://application:,,,/Resources/Icons/jog_x_reverse.png" Stretch="UniformToFill"/>
                 </Button>
 
                 <Button x:Name="jogZ1Rev" Grid.Row="4" Grid.Column="1" Background="#FFDDDDDD" Margin="2,2,2,2" Click="jogZ1Rev_Click">
-                    <Image Height="50" Width="50" Source="pack://siteoforigin:,,,/Resources/Icons/jog_z_reverse.png" Stretch="UniformToFill"/>
+                    <Image Height="50" Width="50" Source="pack://application:,,,/Resources/Icons/jog_z_reverse.png" Stretch="UniformToFill"/>
                 </Button>
 
                 <Button x:Name="jogZ2Rev" Grid.Row="4" Grid.Column="2" Background="#FFDDDDDD" Margin="2,2,2,2" Click="jogZ2Rev_Click">
-                    <Image Height="50" Width="50" Source="pack://siteoforigin:,,,/Resources/Icons/jog_z_reverse.png" Stretch="UniformToFill"/>
+                    <Image Height="50" Width="50" Source="pack://application:,,,/Resources/Icons/jog_z_reverse.png" Stretch="UniformToFill"/>
                 </Button>
             </Grid>
         </GroupBox>

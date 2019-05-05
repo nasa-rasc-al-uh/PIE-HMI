@@ -26,6 +26,26 @@ namespace PIE_HMI.UserControls
             InitializeComponent();
         }
 
+        public string units = "";
+
+        public void init(double value)
+        {
+            units = " " + units;
+            this.Text = value + units;
+        }
+
+        public double getNumeric()
+        {
+            string value = this.Text.Remove(this.Text.Length - units.Length);
+
+            return Double.Parse(value);
+        }
+
+        public void setText(string text)
+        {
+            this.Text = text + units;
+        }
+
         private static readonly Regex _numerics = new Regex("[^0-9.]+");
         private bool isNumeric(string text)
         {
@@ -49,6 +69,21 @@ namespace PIE_HMI.UserControls
             {
                 e.CancelCommand();
             }
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            int len = units.Length;
+            string text = ((TextBox)sender).Text;
+            
+            if(units.Length > 0)
+                ((TextBox)sender).Text = text.Remove(text.Length - len);
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if(units.Length > 0)
+                ((TextBox)sender).Text += units;
         }
     }
 }

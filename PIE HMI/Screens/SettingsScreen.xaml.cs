@@ -33,10 +33,57 @@ namespace PIE_HMI.Screens
         private BitmapImage bitConnected;
         private BitmapImage bitDisconnected;
 
+        public struct Settings
+        {
+            public int ComTypeIndex;
+            public int ConnTypeIndex;
+            public int BaudRateIndex;
+            public int ComPortIndex;
+            public string slotNumber;
+            public string remoteAddress;
+            public Persist persist;
+        }
+
 
         public SettingsScreen()
         {
             InitializeComponent();
+
+            drillVel.units = "RPM";
+            drillAccel.units = "RPM/s";
+            drillJerk.units = "RPM/s^2";
+
+            z1TravelVel.units = "mm/s";
+            z1DrillVel.units = "mm/s";
+            z1Accel.units = "mm/s^2";
+            z1Jerk.units = "mm/s^3";
+
+            z2TravelVel.units = "mm/s";
+            z2ProbeVel.units = "mm/s";
+            z2Accel.units = "mm/s^2";
+            z2Jerk.units = "mm/s^3";
+
+            xVel.units = "mm/s";
+            xAccel.units = "mm/s^2";
+            xJerk.units = "mm/s^3";
+
+            drillVel.init(0);
+            drillAccel.init(0);
+            drillJerk.init(0);
+
+            z1TravelVel.init(0);
+            z1DrillVel.init(0);
+            z1Accel.init(0);
+            z1Jerk.init(0);
+
+            z2TravelVel.init(0);
+            z2ProbeVel.init(0);
+            z2Accel.init(0);
+            z2Jerk.init(0);
+
+            xVel.init(0);
+            xAccel.init(0);
+            xJerk.init(0);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -44,8 +91,8 @@ namespace PIE_HMI.Screens
             SPIComms = Communication.Instance;
             try
             {
-                bitConnected = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/Icons/Green.ico", UriKind.Absolute));
-                bitDisconnected = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/Icons/Grey.ico", UriKind.Absolute));
+                bitConnected = new BitmapImage(new Uri("pack://application:,,,/Resources/Icons/Green.ico", UriKind.Absolute));
+                bitDisconnected = new BitmapImage(new Uri("pack://application:,,,/Resources/Icons/Grey.ico", UriKind.Absolute));
             }
             catch(Exception ex)
             {
@@ -59,37 +106,46 @@ namespace PIE_HMI.Screens
             CommPortCmB.SelectedIndex = 0;   //  COM channel
         }
 
-        private void updateSettings()
+        private void updateSettings(Settings settings)
         {
+
+            ConnTypeCmB.SelectedIndex = settings.ConnTypeIndex;
+            ComTypeCmB.SelectedIndex = settings.ComTypeIndex;
+            BaudRateCmB.SelectedIndex = settings.BaudRateIndex;
+            CommPortCmB.SelectedIndex = settings.ComPortIndex;
+
+            RemoteAddressTB.Text = settings.remoteAddress;
+            SlotNumberTB.Text = settings.slotNumber;
+
             if (SPIComms == null) return;
 
-            if(SPIComms.Connected())
+            if (SPIComms.Connected())
             {
                 SPIComms.ReadPersist();
 
             }
-            
+
             // Update drill settings
-            drillVel.Text = SPIComms.persist.drillVel.ToString();
-            drillAccel.Text = SPIComms.persist.drillAccel.ToString();
-            drillJerk.Text = SPIComms.persist.drillJerk.ToString();
+            drillVel.setText(SPIComms.persist.drillVel.ToString());
+            drillAccel.setText(SPIComms.persist.drillAccel.ToString());
+            drillJerk.setText(SPIComms.persist.drillJerk.ToString());
 
             // Update z1 axis settings
-            z1TravelVel.Text = SPIComms.persist.Z1TravelVel.ToString();
-            z1DrillVel.Text = SPIComms.persist.Z1DrillVel.ToString();
-            z1Accel.Text = SPIComms.persist.Z1Accel.ToString();
-            z1Jerk.Text = SPIComms.persist.Z1Jerk.ToString();
+            z1TravelVel.setText(SPIComms.persist.Z1TravelVel.ToString());
+            z1DrillVel.setText(SPIComms.persist.Z1DrillVel.ToString());
+            z1Accel.setText(SPIComms.persist.Z1Accel.ToString());
+            z1Jerk.setText(SPIComms.persist.Z1Jerk.ToString());
 
             // Update z2 axis settings
-            z2TravelVel.Text = SPIComms.persist.Z2TravelVel.ToString();
-            z2ProbeVel.Text = SPIComms.persist.Z2ProbeVel.ToString();
-            z2Accel.Text = SPIComms.persist.Z2Accel.ToString();
-            z2Jerk.Text = SPIComms.persist.Z2Jerk.ToString();
+            z2TravelVel.setText(SPIComms.persist.Z2TravelVel.ToString());
+            z2ProbeVel.setText(SPIComms.persist.Z2ProbeVel.ToString());
+            z2Accel.setText(SPIComms.persist.Z2Accel.ToString());
+            z2Jerk.setText(SPIComms.persist.Z2Jerk.ToString());
 
             // Update X-Axis settings
-            xVel.Text = SPIComms.persist.XVel.ToString();
-            xAccel.Text = SPIComms.persist.XAccel.ToString();
-            xJerk.Text = SPIComms.persist.XJerk.ToString();
+            xVel.setText(SPIComms.persist.XVel.ToString());
+            xAccel.setText(SPIComms.persist.XAccel.ToString());
+            xJerk.setText(SPIComms.persist.XJerk.ToString());
 
         }
 
@@ -170,7 +226,7 @@ namespace PIE_HMI.Screens
                         else
                             Protocol = (int)EthernetCommOption.ACSC_SOCKET_STREAM_PORT;
                         // Open ethernet communuication.
-                        // RemoteAddress.Text defines the controller's TCP/IP address.
+                        // RemoteAddress.getNumeric() defines the controller's TCP/IP address.
                         // Protocol is TCP/IP in case of network connection, and UDP in case of point-to-point connection.
                         SPIComms.OpenCommNetwork(RemoteAddressTB.Text, Protocol);
                     }
@@ -190,7 +246,7 @@ namespace PIE_HMI.Screens
                     if (SPIComms.Connected())
                     {
                         ConnectionState.Source = bitConnected;
-                        updateSettings();
+                        updateSettings(new Settings());
                     }
 
                 }
@@ -209,26 +265,26 @@ namespace PIE_HMI.Screens
             if(SPIComms.Connected())
             {
                 //Drill Axis
-                SPIComms.persist.drillVel = Double.Parse(drillVel.Text);
-                SPIComms.persist.drillAccel = Double.Parse(drillAccel.Text);
-                SPIComms.persist.drillJerk = Double.Parse(drillJerk.Text);
+                SPIComms.persist.drillVel = drillVel.getNumeric();
+                SPIComms.persist.drillAccel = drillAccel.getNumeric();
+                SPIComms.persist.drillJerk = drillJerk.getNumeric();
 
                 //Z1 Axis
-                SPIComms.persist.Z1TravelVel = Double.Parse(z1TravelVel.Text);
-                SPIComms.persist.Z1DrillVel = Double.Parse(z1DrillVel.Text);
-                SPIComms.persist.Z1Accel = Double.Parse(z1Accel.Text);
-                SPIComms.persist.Z1Jerk = Double.Parse(z1Jerk.Text);
+                SPIComms.persist.Z1TravelVel = z1TravelVel.getNumeric();
+                SPIComms.persist.Z1DrillVel = z1DrillVel.getNumeric();
+                SPIComms.persist.Z1Accel = z1Accel.getNumeric();
+                SPIComms.persist.Z1Jerk = z1Jerk.getNumeric();
 
                 //Z2 Axis
-                SPIComms.persist.Z2TravelVel = Double.Parse(z2TravelVel.Text);
-                SPIComms.persist.Z2ProbeVel = Double.Parse(z2ProbeVel.Text);
-                SPIComms.persist.Z2Accel = Double.Parse(z2Accel.Text);
-                SPIComms.persist.Z2Jerk = Double.Parse(z2Jerk.Text);
+                SPIComms.persist.Z2TravelVel = z2TravelVel.getNumeric();
+                SPIComms.persist.Z2ProbeVel = z2ProbeVel.getNumeric();
+                SPIComms.persist.Z2Accel = z2Accel.getNumeric();
+                SPIComms.persist.Z2Jerk = z2Jerk.getNumeric();
 
                 //X Axis
-                SPIComms.persist.XVel = Double.Parse(xVel.Text);
-                SPIComms.persist.XAccel = Double.Parse(xAccel.Text);
-                SPIComms.persist.XJerk = Double.Parse(xJerk.Text);
+                SPIComms.persist.XVel = xVel.getNumeric();
+                SPIComms.persist.XAccel = xAccel.getNumeric();
+                SPIComms.persist.XJerk = xJerk.getNumeric();
 
                 SPIComms.WritePersist();
             }
@@ -238,17 +294,27 @@ namespace PIE_HMI.Screens
         private void SaveSettingsBtn_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "XML File (*.xml)|*.xml";
+            saveFileDialog.Filter = "PIE Settings File (*.pie)|*.pie";
             saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             if(saveFileDialog.ShowDialog() == true)
             {
                 string fileName = saveFileDialog.FileName;
 
-                XmlSerializer serializer = new XmlSerializer(typeof(Persist));
+                XmlSerializer serializer = new XmlSerializer(typeof(Settings));
                 TextWriter writer = new StreamWriter(fileName);
 
-                serializer.Serialize(writer, SPIComms.persist);
+                Settings settings = new Settings();
+                settings.persist = SPIComms.persist;
+
+                settings.ComTypeIndex = ComTypeCmB.SelectedIndex;
+                settings.ConnTypeIndex = ConnTypeCmB.SelectedIndex;
+                settings.BaudRateIndex = BaudRateCmB.SelectedIndex;
+                settings.ComPortIndex = CommPortCmB.SelectedIndex;
+                settings.remoteAddress = RemoteAddressTB.Text;
+                settings.slotNumber = SlotNumberTB.Text;                
+
+                serializer.Serialize(writer, settings);
 
             }
         }
@@ -256,7 +322,7 @@ namespace PIE_HMI.Screens
         private void LoadSettingsBtn_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "XML File (*.xml)|*.xml";
+            openFileDialog.Filter = "PIE Settings File (*.pie)|*.pie";
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             openFileDialog.Multiselect = false;
 
@@ -267,12 +333,15 @@ namespace PIE_HMI.Screens
                 try
                 {
 
-                    XmlSerializer serializer = new XmlSerializer(typeof(Persist));
+                    XmlSerializer serializer = new XmlSerializer(typeof(Settings));
                     FileStream fs = new FileStream(fileName, FileMode.Open);
-                    SPIComms.persist = (Persist)serializer.Deserialize(fs);
-                    SPIComms.WritePersist();
+                    Settings settings = (Settings)serializer.Deserialize(fs);
 
-                    updateSettings();
+                    SPIComms.persist = settings.persist;
+                    if(SPIComms.Connected())
+                        SPIComms.WritePersist();
+
+                    updateSettings(settings);
                 }
                 catch(Exception ex)
                 {

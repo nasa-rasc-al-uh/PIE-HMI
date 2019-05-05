@@ -9,7 +9,6 @@
              PreviewTextInput="numericEntry"
              DataObject.Pasting="numericPasting"
              HorizontalContentAlignment="Center"
-             VerticalContentAlignment="Center"
-             InputScope="Number">
+             VerticalContentAlignment="Center" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus">
 
 </TextBox>

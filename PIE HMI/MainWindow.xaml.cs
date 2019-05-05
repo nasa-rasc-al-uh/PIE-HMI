@@ -97,7 +97,7 @@ namespace PIE_HMI
                     totalPwr.Content = SPIComms.global.totalPwr.ToString();
 
                     int state = (int)SPIComms.global.machineState;
-                    updateMachineState(state);
+                    Operator.updateMachineState(state);
                 }
                 catch (Exception ex)
                 {
@@ -106,7 +106,7 @@ namespace PIE_HMI
             }
             else
             {
-                updateMachineState(-1);
+                Operator.updateMachineState(-1);
             }
 
             // if the communicatioin is connected, disable communication controls
@@ -129,35 +129,6 @@ namespace PIE_HMI
                 Settings.SlotNumberTB.IsEnabled = true;
                 Settings.RemoteAddressTB.IsEnabled = true;
                 Settings.ConnectBtn.IsEnabled = true;
-            }
-        }
-
-        //TODO: Move this to Operator.xaml.cs, change Messages instead of integer states
-        private void updateMachineState(int state)
-        {
-            switch (state)
-            {
-                case -1:
-                    Operator.machineState.Content = "NOT CONNECTED";
-                    break;
-                case 0:
-                    Operator.machineState.Content = "STOPPED";
-                    break;
-                case 10:
-                    Operator.machineState.Content = "OPERATOR CONTROL STATE";
-                    break;
-                case 50:
-                    Operator.machineState.Content = "INIT AUTONOMOUS STATE";
-                    break;
-                case 100:
-                    Operator.machineState.Content = "DRILLING AND CORING STATE";
-                    break;
-                case 150:
-                    Operator.machineState.Content = "WATER EXTRACTION STATE";
-                    break;
-                case 200:
-                    Operator.machineState.Content = "FILTRATION STATE";
-                    break;
             }
         }
     }

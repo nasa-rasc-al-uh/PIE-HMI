@@ -1,4 +1,5 @@
 ﻿using LiveCharts;
+using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
@@ -30,49 +31,32 @@ namespace PIE_HMI.Graphs
             {
                 new LineSeries
                 {
-                    Title = "Total",
-                    Values = new ChartValues<double>()
-                },
-                new LineSeries
-                {
-                    Title = "Frame",
-                    Values = new ChartValues<double>()
-                },
-                new LineSeries
-                {
-                    Title = "Drill",
-                    Values = new ChartValues<double>()
-                },
-                new LineSeries
-                {
-                    Title = "Water Ex",
-                    Values = new ChartValues<double>()
-                },
-                new LineSeries
-                {
-                    Title = "Filtration",
-                    Values = new ChartValues<double>()
+                    Title = "Weight on Bit (WOB)",
+                    Values = new ChartValues<ObservablePoint>()
                 }
             };
 
 
-            SeriesCollection[0].Values.Add(400d);
-            SeriesCollection[1].Values.Add(300d);
-            SeriesCollection[2].Values.Add(200d);
-            SeriesCollection[3].Values.Add(100d);
-            SeriesCollection[4].Values.Add(0d);
 
-            SeriesCollection[0].Values.Add(500d);
-            SeriesCollection[1].Values.Add(400d);
-            SeriesCollection[2].Values.Add(300d);
-            SeriesCollection[3].Values.Add(200d);
-            SeriesCollection[4].Values.Add(100d);
+            SeriesCollection[0].Values.Add(new ObservablePoint(50d, -10d));
 
-            SeriesCollection[0].Values.Add(400d);
-            SeriesCollection[1].Values.Add(300d);
-            SeriesCollection[2].Values.Add(200d);
-            SeriesCollection[3].Values.Add(100d);
-            SeriesCollection[4].Values.Add(0d);
+            SeriesCollection[0].Values.Add(new ObservablePoint(60d, -20d));
+
+            SeriesCollection[0].Values.Add(new ObservablePoint(70d, -30d));
+
+            SeriesCollection[0].Values.Add(new ObservablePoint(70d, -40d));
+
+            SeriesCollection[0].Values.Add(new ObservablePoint(70d, -50d));
+
+            SeriesCollection[0].Values.Add(new ObservablePoint(120d, -60d));
+            SeriesCollection[0].Values.Add(new ObservablePoint(120d, -70d));
+            SeriesCollection[0].Values.Add(new ObservablePoint(120d, -80d));
+
+
+            SeriesCollection[0].Values.Add(new ObservablePoint(100d, -90d));
+            SeriesCollection[0].Values.Add(new ObservablePoint(100d, -99d));
+
+            
 
             //Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May" };
             //YFormatter = value => value.ToString("C");

@@ -27,7 +27,7 @@
             </TabItem>
             <TabItem x:Name="jobTab" Header="Job Setup">
                 <Grid Background="#FFE5E5E5">
-                    
+                    <Screens:JobSetupScreen x:Name="jobSetup" Height="661" Width="916" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="0,0,-6,0" />
                 </Grid>
             </TabItem>
             <TabItem x:Name="dataTab" Header="Data">

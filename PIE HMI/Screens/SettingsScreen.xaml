@@ -34,7 +34,7 @@
 
                 <!-- Row 1 -->
                 <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Channel</Label>
-                <ComboBox x:Name="ComTypeCmB" Grid.Row="0" Grid.Column="1" Margin="2 7 2 7" SelectionChanged="ComTypeCmB_SelectionChanged">
+                <ComboBox x:Name="ComTypeCmB" Grid.Row="0" Grid.Column="1" Margin="2 7 2 7" SelectionChanged="ComTypeCmB_SelectionChanged" IsSynchronizedWithCurrentItem="True">
                     <ComboBoxItem>Serial</ComboBoxItem>
                     <ComboBoxItem>Network</ComboBoxItem>
                     <ComboBoxItem>PCI Bus</ComboBoxItem>
@@ -44,7 +44,7 @@
                 <TextBox x:Name="SlotNumberTB" Grid.Row="0" Grid.Column="3" Margin="7 5 2 7" Visibility="Hidden"></TextBox>
                 <TextBox x:Name="RemoteAddressTB" Grid.Row="0" Grid.Column="3" Margin="7 5 2 7"></TextBox>
 
-                <ComboBox x:Name="CommPortCmB" Grid.Row="0" Grid.Column="3" Margin="2 7 2 7" Visibility="Hidden">
+                <ComboBox x:Name="CommPortCmB" Grid.Row="0" Grid.Column="3" Margin="2 7 2 7" Visibility="Hidden" IsSynchronizedWithCurrentItem="True">
                     <ComboBoxItem>Com1</ComboBoxItem>
                     <ComboBoxItem>Com2</ComboBoxItem>
                     <ComboBoxItem>Com3</ComboBoxItem>
@@ -53,11 +53,11 @@
 
                 <!-- Row 2 -->
                 <TextBlock x:Name="RateLb" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">Connection</TextBlock>
-                <ComboBox x:Name="ConnTypeCmB" Grid.Row="1" Grid.Column="3" Margin="2 7 2 7">
+                <ComboBox x:Name="ConnTypeCmB" Grid.Row="1" Grid.Column="3" Margin="2 7 2 7" IsSynchronizedWithCurrentItem="True">
                     <ComboBoxItem>Network</ComboBoxItem>
                     <ComboBoxItem>Point to Point</ComboBoxItem>
                 </ComboBox>
-                <ComboBox x:Name="BaudRateCmB" Grid.Row="1" Grid.Column="3" Margin="2 7 2 7" Visibility="Hidden" SelectedValuePath="Content">
+                <ComboBox x:Name="BaudRateCmB" Grid.Row="1" Grid.Column="3" Margin="2 7 2 7" Visibility="Hidden" SelectedValuePath="Content" IsSynchronizedWithCurrentItem="True">
                     <ComboBoxItem>Auto</ComboBoxItem>
                     <ComboBoxItem>300</ComboBoxItem>
                     <ComboBoxItem>1200</ComboBoxItem>
@@ -72,7 +72,7 @@
                 <!-- Row 3 -->
                 <Button x:Name="ConnectBtn" Grid.Row="2" Grid.Column="1" Margin="2 7 2 7" Click="ConnectBtn_Click">Connect</Button>
                 <Button x:Name="DisconnectBtn" Grid.Row="2" Grid.Column="3" Margin="2 7 2 7" Click="DisconnectBtn_Click">Disconnect</Button>
-                <Image x:Name="ConnectionState" Grid.Row="2" Grid.Column="2" Stretch="None" Source="pack://siteoforigin:,,,/Resources/Icons/Grey.ico" Margin="0,5,0,-5" />
+                <Image x:Name="ConnectionState" Grid.Row="2" Grid.Column="2" Stretch="None" Source="pack://application:,,,/Resources/Icons/Grey.ico" Margin="0,5,0,-5" />
 
             </Grid>
         </GroupBox>
