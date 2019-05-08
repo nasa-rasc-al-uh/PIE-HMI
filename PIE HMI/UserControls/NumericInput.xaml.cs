@@ -26,18 +26,24 @@ namespace PIE_HMI.UserControls
             InitializeComponent();
         }
 
-        public string units = "";
+        private string units = "";
+        private bool allowDecimals = true;
 
-        public void init(double value)
+        public void init(double value, string unit = "")
         {
+            units = unit.Trim();
             units = " " + units;
             this.Text = value + units;
         }
 
         public double getNumeric()
         {
-            string value = this.Text.Remove(this.Text.Length - units.Length);
+            string value;
 
+            if (units.Length > 1)
+                value = this.Text.Remove(this.Text.Length - units.Length);
+            else
+                value = this.Text.Trim();
             return Double.Parse(value);
         }
 
@@ -47,9 +53,12 @@ namespace PIE_HMI.UserControls
         }
 
         private static readonly Regex _numerics = new Regex("[^0-9.]+");
+
+        public bool AllowDecimals { get => allowDecimals; set => allowDecimals = value; }
+
         private bool isNumeric(string text)
         {
-            return !_numerics.IsMatch(text) && (this.Text + text).Count(x => x == '.') <= 1;
+            return !_numerics.IsMatch(text) && (this.Text + text).Count(x => x == '.') <= (allowDecimals?1:0);
         }
         private void numericEntry(object sender, TextCompositionEventArgs e)
         {

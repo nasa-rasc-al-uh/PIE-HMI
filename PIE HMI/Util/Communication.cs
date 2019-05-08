@@ -11,20 +11,22 @@ namespace PIE_HMI.Util
 {
     public struct Global
     {
+        // System publics
+        public int running;
+        public int advanceState;
         public int machineState;
 
+        // public State Machine vars
         public int opControlState;
-        public int drillCoreState;
+        public int drillState;
+        public int coreState;
         public int extractState;
         public int filterState;
 
-        public int running;
-
-        public int advanceState;
-
+        // Telemetry
         public double drillWOB;
         public double drillRPM;
-        public double heatTemp;
+        public int heatTemp;
 
         public double framePwr;
         public double drillPwr;
@@ -32,18 +34,55 @@ namespace PIE_HMI.Util
         public double filterPwr;
         public double totalPwr;
 
-        public int drillState;
+        public int holeCount;
 
-        public double PELLET1_TC1_OFFSET, PELLET1_TC1_STATUS_OFFSET;
-        public double PELLET1_TC1, PELLET1_TC1_STATUS;
+        // Coring vars
+        public int coreSamples;
+        public double coreRPM;
 
-        int ECAT_OUT1;
+        // Drilling Vars
+        public double touchRMS;
+        public double peckDistance;
+        public double retractDistance;
+        public double holeSpacing;
+        public int numHoles;
 
+        // Water Extract Vars
+        public double xOffset;
+        public double heaterSetpoint;
+
+        // Filtration vars
+        public int backFlush;
+        public double ecAmpTarget;
+        public double ecTime;
+        public int enableSloshing;
+        public double sloshAmplitude;
+        public double sloshFrequency;
+        public double sloshTime;
+
+        // Heater control vars
+        public int pellet1_h1_SetTemp;
+        public double PELLET1_TC1_OFFSET,PELLET1_TC1_STATUS_OFFSET;
+        public double PELLET1_TC1, PELLET1_TC1_STATUS;   //This is the temperature variable in c
+
+        // Digital and Analog IO
+        public int ECAT_OFFSET;
+        public int ECAT_OUT1; // Digital Out
+        public int ECAT_OUT2; // Analog Out 1
+        public int ECAT_OUT3; // Analog Out 2
+        public int ECAT_IN1;  // Digital In 1
+
+        // Jog Control vars
         public double jogX;
         public double jogZ1;
         public double jogZ2;
         public double jogDrill;
         public int jogBoreholePump;
+
+        // Homing vars
+        public int currentHomingAxis;
+        public int homeAxis;
+
     };
 
     public struct Persist

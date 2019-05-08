@@ -48,42 +48,23 @@ namespace PIE_HMI.Screens
         public SettingsScreen()
         {
             InitializeComponent();
+            drillVel.init(0, "RPM");
+            drillAccel.init(0, "RPM/s");
+            drillJerk.init(0, "RPM/s^2");
 
-            drillVel.units = "RPM";
-            drillAccel.units = "RPM/s";
-            drillJerk.units = "RPM/s^2";
+            z1TravelVel.init(0, "mm/s");
+            z1DrillVel.init(0, "mm/s");
+            z1Accel.init(0, "mm/s^2");
+            z1Jerk.init(0, "mm/s^3");
 
-            z1TravelVel.units = "mm/s";
-            z1DrillVel.units = "mm/s";
-            z1Accel.units = "mm/s^2";
-            z1Jerk.units = "mm/s^3";
+            z2TravelVel.init(0, "mm/s");
+            z2ProbeVel.init(0, "mm/s");
+            z2Accel.init(0, "mm/s^2");
+            z2Jerk.init(0, "mm/s^3");
 
-            z2TravelVel.units = "mm/s";
-            z2ProbeVel.units = "mm/s";
-            z2Accel.units = "mm/s^2";
-            z2Jerk.units = "mm/s^3";
-
-            xVel.units = "mm/s";
-            xAccel.units = "mm/s^2";
-            xJerk.units = "mm/s^3";
-
-            drillVel.init(0);
-            drillAccel.init(0);
-            drillJerk.init(0);
-
-            z1TravelVel.init(0);
-            z1DrillVel.init(0);
-            z1Accel.init(0);
-            z1Jerk.init(0);
-
-            z2TravelVel.init(0);
-            z2ProbeVel.init(0);
-            z2Accel.init(0);
-            z2Jerk.init(0);
-
-            xVel.init(0);
-            xAccel.init(0);
-            xJerk.init(0);
+            xVel.init(0, "mm/s");
+            xAccel.init(0, "mm/s^2");
+            xJerk.init(0, "mm/s^3");
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

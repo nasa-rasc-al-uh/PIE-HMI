@@ -45,31 +45,6 @@ namespace PIE_HMI
             }
         }
 
-        private static readonly Regex _numerics = new Regex("[^0-9.]+");
-        private bool isNumeric(string text)
-        {
-            return !_numerics.IsMatch(text);
-        }
-        private void numericEntry(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !isNumeric(e.Text);
-        }
-        private void numericPasting(object sender, DataObjectPastingEventArgs e)
-        {
-            if (e.DataObject.GetDataPresent(typeof(String)))
-            {
-                String text = (String)e.DataObject.GetData(typeof(String));
-                if (!isNumeric(text))
-                {
-                    e.CancelCommand();
-                }
-            }
-            else
-            {
-                e.CancelCommand();
-            }
-        }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             telemetryTimer.Tick += new EventHandler(dispatcherTimer_Tick);

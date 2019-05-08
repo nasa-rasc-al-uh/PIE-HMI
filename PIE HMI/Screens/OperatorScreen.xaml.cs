@@ -29,15 +29,10 @@ namespace PIE_HMI.Screens
         {
             InitializeComponent();
             SPIComms = Communication.Instance;
-            xAxisStep.units = "mm";
-            z1AxisStep.units = "mm";
-            z2AxisStep.units = "mm";
-            drillValue.units = "RPM";
-
-            xAxisStep.init(0);
-            z1AxisStep.init(0);
-            z2AxisStep.init(0);
-            drillValue.init(0);
+            xAxisStep.init(0, "mm");
+            z1AxisStep.init(0, "mm");
+            z2AxisStep.init(0, "mm");
+            drillValue.init(0, "RPM");
         }
 
         private void enableControl()

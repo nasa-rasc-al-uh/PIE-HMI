@@ -45,6 +45,21 @@
             </Grid>
         </GroupBox>
         <GroupBox Header="Digital Core Params" Width="423" Height="139" BorderBrush="Black" FontSize="11" Grid.Row="0" Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Number of Core Holes</Label>
+                <UserControls:NumericInput x:Name="coreSamples" Grid.Row="0" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
+
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Coring RPM</Label>
+                <UserControls:NumericInput x:Name="coreRPM" Grid.Row="1" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
+            </Grid>
         </GroupBox>
         <GroupBox Header="Water Extract Params" BorderBrush="Black" Width="423" FontSize="11" Grid.Row="1" Grid.Column="0">
             <Grid>
@@ -56,8 +71,8 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Z Offset</Label>
-                <UserControls:NumericInput x:Name="zOffset" Grid.Row="0" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">X Offset</Label>
+                <UserControls:NumericInput x:Name="xOffset" Grid.Row="0" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
 
                 <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Heater Temperature</Label>
                 <UserControls:NumericInput x:Name="heaterTemp" Grid.Row="1" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
@@ -66,7 +81,6 @@
         <GroupBox Header="Filtration Params" BorderBrush="Black" Width="423" FontSize="11" Grid.Row="2" Grid.Column="0">
             <Grid Height="363">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
@@ -96,8 +110,6 @@
                 <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Slosh Time</Label>
                 <UserControls:NumericInput x:Name="sloshTime" Grid.Row="5" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
                 
-                <Label Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 15 10 15">Back Flush Trigger Current</Label>
-                <UserControls:NumericInput x:Name="backFlushTrigger" Grid.Row="6" Grid.Column="1" Margin="10 10 10 10" Text="0.0"></UserControls:NumericInput>
             </Grid>
         </GroupBox>
         <GroupBox Header="Hole Params" BorderBrush="Black" Width="423" FontSize="11" Grid.Row="1" Grid.Column="1">
@@ -127,9 +139,9 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Row="0" Grid.Column="0">Update All</Button>
-                <Button Grid.Row="1" Grid.Column="0">Save</Button>
-                <Button Grid.Row="2" Grid.Column="0">Load</Button>
+                <Button x:Name="updateBtn" Grid.Row="0" Grid.Column="0" Click="updateBtn_Click">Update All</Button>
+                <Button x:Name="saveBtn" Grid.Row="1" Grid.Column="0" Click="saveBtn_Click">Save</Button>
+                <Button x:Name="loadBtn" Grid.Row="2" Grid.Column="0" Click="loadBtn_Click">Load</Button>
             </Grid>
         </GroupBox>
         <!--<Button x:Name="updateSettingsBtn" Grid.Row="3" Grid.Column="0" Click="UpdateSettingsBtn_Click">Update All</Button> -->
