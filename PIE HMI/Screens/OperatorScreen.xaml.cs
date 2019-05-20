@@ -211,6 +211,33 @@ namespace PIE_HMI.Screens
                 SPIComms.global.jogDrill = drill;
             }
         }
+
+        private void HomeX_Click(object sender, RoutedEventArgs e)
+        {
+            if (SPIComms.Connected())
+            {
+                SPIComms.global.homeX = 1;
+                SPIComms.WriteGlobal();
+            }
+        }
+
+        private void HomeZ1_Click(object sender, RoutedEventArgs e)
+        {
+            if (SPIComms.Connected())
+            {
+                SPIComms.global.homeZ1 = 1;
+                SPIComms.WriteGlobal();
+            }
+        }
+
+        private void HomeZ2_Click(object sender, RoutedEventArgs e)
+        {
+            if (SPIComms.Connected())
+            {
+                SPIComms.global.homeZ2 = 1;
+                SPIComms.WriteGlobal();
+            }
+        }
     }
 
 }

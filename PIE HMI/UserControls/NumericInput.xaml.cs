@@ -44,6 +44,8 @@ namespace PIE_HMI.UserControls
                 value = this.Text.Remove(this.Text.Length - units.Length);
             else
                 value = this.Text.Trim();
+            if (value.Length == 0)
+                value = "0";
             return Double.Parse(value);
         }
 

@@ -78,6 +78,9 @@ namespace PIE_HMI.Util
         public double jogZ2;
         public double jogDrill;
         public int jogBoreholePump;
+        public int homeX;
+        public int homeZ1;
+        public int homeZ2;
 
         // Homing vars
         public int currentHomingAxis;
@@ -223,7 +226,8 @@ namespace PIE_HMI.Util
         {
             try
             {
-                ch.WriteVariable(value, variable, buffer);
+                if(Connected())
+                    ch.WriteVariable(value, variable, buffer);
             }
             catch(Exception ex)
             {
@@ -237,7 +241,8 @@ namespace PIE_HMI.Util
             object data = (int)0;
             try
             {
-                 data = ch.ReadVariable(variable, buffer);
+                if(Connected())
+                    data = ch.ReadVariable(variable, buffer);
             }
             catch(Exception ex)
             {

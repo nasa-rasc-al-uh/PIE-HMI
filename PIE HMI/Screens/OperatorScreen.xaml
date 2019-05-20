@@ -30,15 +30,15 @@
                 <Label Content="Z2 (Water Ex)" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                 <!-- Row 2 -->
-                <Button x:Name="homeX" Grid.Row="1" Grid.Column="0" Background="#FFDDDDDD" Margin="2,2,2,2">
+                <Button x:Name="homeX" Grid.Row="1" Grid.Column="0" Background="#FFDDDDDD" Margin="2,2,2,2" Click="HomeX_Click">
                     <Image Height="50" Width="50" Source="pack://application:,,,/Resources/Icons/home_x.png" Stretch="UniformToFill"/>
                 </Button>
 
-                <Button x:Name="homeZ1" Grid.Row="1" Grid.Column="1" Background="#FFDDDDDD" Margin="2,2,2,2">
+                <Button x:Name="homeZ1" Grid.Row="1" Grid.Column="1" Background="#FFDDDDDD" Margin="2,2,2,2" Click="HomeZ1_Click">
                     <Image Height="50" Width="50" Source="pack://application:,,,/Resources/Icons/home_z.png" Stretch="UniformToFill"/>
                 </Button>
 
-                <Button x:Name="homeZ2" Grid.Row="1" Grid.Column="2" Background="#FFDDDDDD" Margin="2,2,2,2">
+                <Button x:Name="homeZ2" Grid.Row="1" Grid.Column="2" Background="#FFDDDDDD" Margin="2,2,2,2" Click="HomeZ2_Click">
                     <Image Height="50" Width="50" Source="pack://application:,,,/Resources/Icons/home_z.png" Stretch="UniformToFill"/>
                 </Button>
 
