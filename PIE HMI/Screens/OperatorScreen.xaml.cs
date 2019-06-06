@@ -39,12 +39,16 @@ namespace PIE_HMI.Screens
         {
             axesJog.IsEnabled = true;
             jogControls.IsEnabled = true;
+            startAuton.IsEnabled = true;
+            pauseAuton.IsEnabled = false;
+            stopAuton.IsEnabled = false;
         }
        
         private void disableControl()
         {
             axesJog.IsEnabled = false;
             jogControls.IsEnabled = false;
+            startAuton.IsEnabled = false;
         }
         
         public void updateMachineState(int state)
@@ -88,6 +92,8 @@ namespace PIE_HMI.Screens
             {
                 SPIComms.global.advanceState = 1;
                 SPIComms.WriteGlobal();
+                pauseAuton.IsEnabled = true;
+                stopAuton.IsEnabled = true;
             }
         }
 
@@ -96,6 +102,30 @@ namespace PIE_HMI.Screens
             if(SPIComms.Connected())
             {
                 SPIComms.global.running = 0;
+                SPIComms.WriteGlobal();
+                pauseAuton.IsEnabled = false;
+                stopAuton.IsEnabled = false;
+            }
+        }
+
+        private void PauseAuton_Click(object sender, RoutedEventArgs e)
+        {
+            if( SPIComms.Connected() )
+            {
+                if(pauseAuton.Content.Equals("Pause Autonomous"))
+                {
+                    pauseAuton.Content = "Resume Autonomous";
+                }else if (pauseAuton.Content.Equals("Resume Autonomous"))
+                {
+                }
+            }
+        }
+
+        private void StopAuton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SPIComms.Connected())
+            {
+                SPIComms.global.machineState = 350;
                 SPIComms.WriteGlobal();
             }
         }

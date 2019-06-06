@@ -48,7 +48,7 @@ namespace PIE_HMI
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             telemetryTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            telemetryTimer.Interval = new TimeSpan(0, 0, 1);
+            telemetryTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
             telemetryTimer.Start();
         }
 
@@ -63,6 +63,8 @@ namespace PIE_HMI
 
                     wobReadout.Content = SPIComms.global.drillWOB.ToString();
                     rpmReadout.Content = SPIComms.global.drillRPM.ToString();
+                    ropReadout.Content = SPIComms.global.ROP.ToString();
+
                     heatTemp.Content = SPIComms.global.heatTemp.ToString();
 
                     framePwr.Content = SPIComms.global.framePwr.ToString();

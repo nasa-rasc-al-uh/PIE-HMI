@@ -115,8 +115,10 @@
                 <Button Grid.Row="3" Grid.Column="3" x:Name="pumpFwd" Margin="2, 2, 2, 2" Content="On"/>
             </Grid>
         </GroupBox>
-        <Button x:Name="stopBtn" Content="STOP" HorizontalAlignment="Left" Margin="350,258,0,0" VerticalAlignment="Top" Width="233" RenderTransformOrigin="-0.333,-0.75" Height="115" FontSize="72" Background="Red" Click="StopBtn_Click"/>
-        <Button x:Name="startAuton" Content="Start Autonomous Mode" HorizontalAlignment="Left" Margin="593,258,0,0" VerticalAlignment="Top" Width="296" Height="115" Background="#FF03A803" FontSize="22" Click="StartAuton_Click"/>
+        <Button x:Name="stopBtn" Content="E-STOP" HorizontalAlignment="Left" Margin="487,234,0,0" VerticalAlignment="Top" Width="252" RenderTransformOrigin="-0.333,-0.75" Height="115" FontSize="72" Background="Red" Click="StopBtn_Click"/>
+        <Button x:Name="startAuton" Content="Start Autonomous" HorizontalAlignment="Left" Margin="25,391,0,0" VerticalAlignment="Top" Width="200" Height="115" Background="#FF03A803" FontSize="22" Click="StartAuton_Click"/>
+        <Button x:Name="pauseAuton" Content="Pause Autonomous" HorizontalAlignment="Left" Margin="250,391,0,0" VerticalAlignment="Top" Width="200" Height="115" Background="Yellow" FontSize="22" Click="PauseAuton_Click" IsEnabled="False"/>
+        <Button x:Name="stopAuton" Content="Cancel Autonomous" HorizontalAlignment="Left" Margin="500,391,0,0" VerticalAlignment="Top" Width="200" Height="115" Background="Red" FontSize="22" Click="StopAuton_Click" IsEnabled="False"/>
 
     </Grid>
 </UserControl>

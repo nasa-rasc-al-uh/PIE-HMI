@@ -35,15 +35,15 @@
                 <!-- Row 1 -->
                 <Label Grid.Row="0" Grid.Column="0" Content="File Location: " Margin="2 2 2 2"/>
                 <TextBox Grid.Row="0" Grid.Column="1" Width="100" Margin="2 2 2 2"/>
-                
+
                 <!-- Row 2 -->
                 <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Export" Margin="2 2 2 2"/>
-
+                
             </Grid>
         </GroupBox>
         
         <!-- Row 2 -->
-        <local11:DrillGraph x:Name="drillGraph" Grid.Row="1" Grid.Column="0" Width="600" MouseDoubleClick="DrillGraph_MouseDoubleClick" />
+        <local11:DrillGraph x:Name="drillGraph" Grid.Row="1" Grid.Column="0" Width="600" />
         <GroupBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Header="CSV Export" BorderBrush="Black">
             <Grid>
                 <Grid.RowDefinitions>
@@ -57,10 +57,10 @@
 
                 <!-- Row 1 -->
                 <Label Grid.Row="0" Grid.Column="0" Content="File Location: " Margin="2 2 2 2"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Width="100" Margin="2 2 2 2"/>
+                <Label x:Name="digitalCoreCSV" Grid.Row="0" Grid.Column="1" Width="100" Margin="2 2 2 2" MouseDoubleClick="TextBox_MouseDoubleClick" BorderThickness="1px" BorderBrush="Black"/>
 
                 <!-- Row 2 -->
-                <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Export" Margin="2 2 2 2"/>
+                <Button x:Name="digitalCoreExport" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Export" Margin="2 2 2 2" Click="digitalCoreExport_Click"/>
 
             </Grid>
         </GroupBox>

@@ -62,6 +62,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -72,9 +73,14 @@
                         <Label Grid.Row="0" Grid.Column="0" x:Name="label1" Content="WOB:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                         <Label Grid.Row="0" Grid.Column="1" x:Name="wobReadout" Content="0"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         <Label Grid.Row="0" Grid.Column="2" Content="N" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        
                         <Label Grid.Row="1" Grid.Column="0" x:Name="label2" Content="Drill RPM:"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
                         <Label Grid.Row="1" Grid.Column="1" x:Name="rpmReadout" Content="0"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         <Label Grid.Row="1" Grid.Column="2" Content="RPM" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" Content="ROP:"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <Label Grid.Row="2" Grid.Column="1" x:Name="ropReadout" Content="0"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <Label Grid.Row="2" Grid.Column="2" Content="mm/s" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     </Grid>
                 </GroupBox>
                 <GroupBox x:Name="waterGp" Header="Water Extractor Telemetry" Grid.Row="1" Grid.Column="0" Width="240" Height="155" BorderBrush="Black" FontSize="11">

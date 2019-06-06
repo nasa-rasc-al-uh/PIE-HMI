@@ -33,7 +33,7 @@ namespace PIE_HMI.Util
         public double waterExPwr;
         public double filterPwr;
         public double totalPwr;
-
+        public double depth;
         public int holeCount;
 
         // Coring vars
@@ -46,6 +46,7 @@ namespace PIE_HMI.Util
         public double retractDistance;
         public double holeSpacing;
         public int numHoles;
+        public double ROP;
 
         // Water Extract Vars
         public double xOffset;
@@ -222,6 +223,38 @@ namespace PIE_HMI.Util
             return connected;
         }
 
+        public void SuspendBuffer(ProgramBuffer buffer)
+        {
+            if(Connected())
+            {
+                try
+                {
+                    ch.SuspendBuffer(buffer);
+                }
+                catch(Exception ex)
+                {
+                    LogScreen.PushMessage(ex.StackTrace, MessageType.Error);
+                    Console.WriteLine(ex.StackTrace);
+                }
+            }
+        }
+
+        public void RunBuffer(ProgramBuffer buffer)
+        {
+            if(Connected())
+            {
+                try
+                {
+                    ch.RunBuffer(buffer, null);
+                }
+                catch (Exception ex)
+                {
+                    LogScreen.PushMessage(ex.StackTrace, MessageType.Error);
+                    Console.WriteLine(ex.StackTrace);
+                }
+            }
+        }
+
         public void WriteVariable(object value, string variable, ProgramBuffer buffer = ProgramBuffer.ACSC_NONE)
         {
             try
@@ -289,9 +322,12 @@ namespace PIE_HMI.Util
             {
                 foreach (var field in typeof(Global).GetFields(BindingFlags.Instance | BindingFlags.Public))
                 {
-                    object boxed = global;
-                    field.SetValue(boxed, ReadVariable(field.Name));
-                    global = (Global)boxed;
+                    if (Connected())
+                    {
+                        object boxed = global;
+                        field.SetValue(boxed, ReadVariable(field.Name));
+                        global = (Global)boxed;
+                    }
                 }
             }
             catch(Exception ex)
